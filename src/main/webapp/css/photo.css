@@ -1,0 +1,324 @@
+/** General page styling **/
+html {
+  font-family: "Helvetica Neue Light", "Helvetica Neue", Arial, sans-serif;
+}
+
+#main {
+  margin: 30px 0;
+  position: relative;
+}
+
+header h1 {
+  text-align: center;
+  font-size: 30px;
+  font-weight: 200;
+  margin: 30px 0 10px 0;
+}
+
+header p {
+  text-align: center;
+  font-size: 14px;
+  color: #666666;
+  margin: 0;
+  font-weight: 200;
+}
+
+/**
+ * Grid container
+ */
+#tiles {
+  list-style-type: none;
+  position: relative; /** Needed to ensure items are laid out relative to this container **/
+  margin: 0;
+  padding: 0;
+}
+
+/**
+ * Grid items
+ */
+#tiles li {
+  width: 250px;
+  background-color: #888888;
+  border: 1px solid #dedede #888888;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  display: none; /** Hide items initially to avoid a flicker effect **/
+  cursor: pointer;
+  padding: 4px;
+  opacity:0;
+  -webkit-transition:all 0.8s ease-out;
+  -moz-transition:all 0.8s ease-out;
+  -o-transition:all 0.8s ease-out;
+  transition:all 0.8s ease-out;
+}
+
+#tiles li.inactive {
+  visibility: hidden;
+  opacity: 0;
+}
+
+#tiles li img {
+  display: block;
+}
+
+/**
+ * Grid item text
+ */
+#tiles li p {
+  color: #DDDDDD;
+  font-size: 15px;
+  line-height: 20px;
+  text-align: center;
+  font-weight: 200;
+  margin: 7px 0 2px 7px;
+  font-family: "方正舒体";
+}
+
+footer {
+  text-align: center;
+
+}
+
+footer a {
+  color: #435DC5;
+  text-decoration: none;
+}
+
+/**
+ * Loader
+ */
+#loader{margin:20px 0;}
+#loaderCircle{display:block;width:16px;height:16px;background:url(../img/loader.gif) no-repeat;}
+
+/**
+ * Progress bar for imagesLoaded
+ */
+.progress-bar {
+  background-color: #0BC20B;
+  height: 2px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 0;
+  box-shadow: 0 1px 3px rgba(11, 194, 11, 0.2);
+  -webkit-transition: width 0.3s ease-out;
+     -moz-transition: width 0.3s ease-out;
+       -o-transition: width 0.3s ease-out;
+          transition: width 0.3s ease-out;
+}
+
+/**
+ * Placerholder css
+ */
+.wookmark-placeholder {
+          border-radius: 5px;
+     -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  background-color: #eee;
+  border: 1px solid #dedede;
+  z-index: -1;
+}
+
+.example-tiles {
+  position: relative; /** Needed to ensure items are laid out relative to this container **/
+  margin: 0;
+  padding: 0;
+}
+
+.example-tiles li {
+  display: block;
+  opacity: 1;
+  list-style-type: none;
+  float: left;
+  margin: 5px;
+  -webkit-transition: all 0.3s ease-out;
+     -moz-transition: all 0.3s ease-out;
+       -o-transition: all 0.3s ease-out;
+          transition: all 0.3s ease-out;
+}
+
+.example-tiles a,
+.example-tiles a:hover {
+  color: #555;
+  background-color: #eee;
+  text-align: center;
+  display: table-cell;
+  vertical-align: middle;
+  width: 250px;
+  height: 250px;
+  font-size: 2em;
+  font-weight: bold;
+  text-decoration: none;
+  border: 1px solid #ddd;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  padding: 5px 8px;
+  border-radius: 3px;
+}
+
+.example-tiles a:hover {
+  background-color: #ddd;
+}
+
+/**
+ * 上面部分只修改了圆角的值，即原先是2px，修改成了5px
+ * 以下为添加的部分
+ */
+
+#rowBar {
+ 	margin-left: 9.5% !important;
+ 	margin-right: 9.5% !important;
+ }
+#containerBar {
+	background-color: #000000;
+}
+.navbar {
+/*	background-color: #111111;*/
+	background-color: #000000;
+/*    	border: 1px solid #111111 !important;*/
+    	border: 3px solid #000000 !important;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	font-family: "方正舒体";
+}
+nav ul li a{
+	font-size: 21px;
+}
+.headImg {
+	height: 50px;
+}
+.headImgWord {
+	color: #777;
+}
+.mark{ 
+	background: url(/photo/image/magnifier.png) no-repeat center 38.2% #000;
+	opacity: 0.7; 
+	display: none; 
+	width: 100%; 
+	height: 100%; 
+	position: absolute; 
+	left: 0; 
+	top: 0; 
+	text-indent: -3000px; 
+	filter: alpha(opacity=0.7);
+/* 	border: 2px solid #ffff00; */
+	border: 2px solid #DAA520;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
+body {
+/*	background-color: #444444 !important;*/
+	background-color: #272727 !important;
+}
+
+.vi {
+	background-color: #888888;
+}
+.quote {
+	background-color: #BBBBBB !important;
+}
+.sl-content-wrapper {
+	width: 81% !important;
+	margin: 0 auto !important;
+}
+
+#tiles li p span{
+	margin-left: 13px;
+	font-size: 12px;
+}
+.sl-slide-inner {
+	font-family: "方正舒体";
+}
+
+
+/**
+ * 返回顶部
+ */
+.backToTop {
+     cursor: pointer;
+     opacity: .5;
+     filter: Alpha(opacity=50); 
+     background:url(/photo/image/top.jpg) no-repeat;display:none; 
+     width:34px; 
+     height:34px; 
+     position: fixed; 
+     _position: absolute; 
+     right: 0px; 
+     bottom:0px; 
+     cursor: pointer; 
+     text-indent:-9999px;
+}
+.backTo{ opacity: .9;
+     filter: Alpha(opacity=100);
+ }
+ 
+ .topButton {
+ 	opacity:0.6;
+ }
+
+/**
+ * about.html
+ * 当窗口变小时，原先的动画效果去除，改成文字显示
+ */
+ #aboutWordShow {
+    display: none;
+ }
+ 
+@media screen and (max-width: 980px){
+	 #rowBar {
+	 	margin-left: 0% !important;
+	 	margin-right: 0% !important;
+	 	padding-left: 0% !important;
+	 	paddint-right: 0% !important;
+	 	width: 100% !important;
+	 }
+	 #containerBar {
+	 	padding-left: 0px;
+	 	padding-right: 0px;
+	 }
+}
+@media screen and (min-width: 770px) {
+	.container-fluid{
+        	height: 60px !important;
+	}
+}
+
+@media screen and (max-width: 769px) {
+    #aboutFlashShow {
+        display: none;
+    }
+    #aboutWordShow {
+        display: block;
+    }
+    #aboutWordShowXs6 {
+        text-align: center;
+    }
+    
+    #aboutWordShowXs6 #firstLine {
+    	margin-top: 8%;
+        color: #CCCCCC;
+    }
+    #aboutWordShowXs6 #writer {
+        font-size: 13px;
+        font-style: italic;    
+    }
+    #aboutWordShowXs6 .row {
+        color: #BBBBBB;
+        margin-top: 3%;
+        font-size: 18px;    
+    }
+    #tiles li p span{
+		margin-left: 20px;
+		font-size: 12px;
+    }
+    /*窗口小于时头像飘浮到左边*/
+    #ulHeadImaAndWord {
+	float: left!important;
+    }
+}
+
+ 

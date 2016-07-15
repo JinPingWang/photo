@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" 
+		xmlns="http://java.sun.com/xml/ns/javaee"
+    	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+  <servlet>
+  	<servlet-name>getPhoto</servlet-name>
+  	<servlet-class>controller.Controller</servlet-class>
+  </servlet>  
+  <servlet-mapping>
+  	<servlet-name>getPhoto</servlet-name>
+  	<url-pattern>/index</url-pattern>
+  	<url-pattern>/scenery</url-pattern>
+  	<url-pattern>/portrait</url-pattern>
+  	<url-pattern>/travel</url-pattern>
+  </servlet-mapping>
+  
+  <!-- 需要处理缓存的请求 -->
+  <filter>
+  	<filter-name>CacheFilter</filter-name>
+  	<filter-class>filters.CacheFilter</filter-class>
+  	<init-param>
+  		<param-name></param-name>
+  		<param-value></param-value>
+  	</init-param>
+  </filter>
+  <!-- 以url模式的过滤器映射 -->
+  <filter-mapping>
+  	<filter-name>CacheFilter</filter-name>
+  	<url-pattern>*.jpg</url-pattern>
+  	<url-pattern>*.gif</url-pattern>
+  	<url-pattern>*.png</url-pattern>
+  	<url-pattern>*.css</url-pattern>
+  	<url-pattern>*.js</url-pattern>
+  </filter-mapping>
+  <!-- 以Servlet名的过滤器映射 -->
+  <!-- 
+  <filter-mapping>
+  	<filter-name>CacheFilter</filter-name>
+  	<servlet-name>/CacheFilter</servlet-name>
+  </filter-mapping>
+  -->
+  
+  
+  <!-- 需要处理压缩的请求 -->
+<!--   <filter> -->
+<!--   	<filter-name>CondenseFilter</filter-name> -->
+<!--   	<filter-class>filters.CondenseFilter</filter-class> -->
+<!--   	<init-param> -->
+<!--   		<param-name></param-name> -->
+<!--   		<param-value></param-value> -->
+<!--   	</init-param> -->
+<!--   </filter> -->
+<!--   <filter-mapping> -->
+<!--   	<filter-name>CondenseFilter</filter-name> -->
+<!--   	<url-pattern>*.html</url-pattern> -->
+<!--   	<url-pattern>*.css</url-pattern> -->
+<!--   	<url-pattern>*.js</url-pattern> -->
+<!--   </filter-mapping> -->
+
+   
+  <display-name>photo</display-name>
+</web-app>
+
