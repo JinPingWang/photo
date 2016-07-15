@@ -1,0 +1,3 @@
+这两个规定了多长时间关闭空闲链接，25200000毫秒=7小时，mysql是8小时后自动关闭空闲连接
+timeBetweenEvictionRunsMillis=25200000
+minEvictableIdleTimeMillis=25200000

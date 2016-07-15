@@ -1,0 +1,15 @@
+1：设置一图片外框的大小
+var options = {
+	autoResize: true, // This will auto-update the layout when the browser window is resized.
+	container: $('#tiles'), // Optional, used for some extra CSS styling
+	offset: 2, // Optional, the distance between grid items
+	itemWidth: 250 // Optional, the width of a grid item
+};
+
+2：设置一张图片的大小 
+html += '<a target="_blank" href="'+image.image+'" title="'+image.title+'">';
+// Image tag (preview in Wookmark are 200px wide, so we calculate the height based on that).
+html += '<img src="'+image.preview+'" width="240" height="'+Math.round(image.height/image.width*240)+'">';
+html += '</a>';
+
+3：还有在main.css中也相应设置长宽

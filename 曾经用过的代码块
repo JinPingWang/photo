@@ -1,0 +1,22 @@
+for(int loop=1; loop<8; loop++){
+	PhotoBean photoBean = new PhotoBean();
+	photoBean.setId(loop+"");
+	photoBean.setTitle("九寨沟");
+	photoBean.setTime("2016-06-29");
+	photoBean.setUrl("/photo/image/");
+	
+	String path = PhotoBean.class.getResource("/").getPath().split("WEB-INF")[0]+"image/"+loop+".jpg";
+	
+	BufferedImage bufferedImage = ImageIO.read(new File(path));   
+	int width = bufferedImage.getWidth();   
+	int height = bufferedImage.getHeight(); 
+	photoBean.setWidth(width+"");
+	photoBean.setHeight(height+"");
+	photoBean.setImage(photoBean.getUrl()+loop+".jpg");
+	photoBean.setPreview(photoBean.getUrl()+loop+".jpg");
+	data.add(photoBean);
+}
+
+
+用于表示这一条请求完后，没数据了，即客户端得到这次响应后，就不会发起下一个请求
+message = "No more pictures";
