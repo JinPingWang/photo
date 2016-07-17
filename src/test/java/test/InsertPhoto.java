@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import bean.PhotosBean;
 import photo.Photo;
 
-public class TestPhoto {
+public class InsertPhoto {
 
 	public static void main(String[] args) throws SQLException, Exception {
 		// TODO Auto-generated method stub
