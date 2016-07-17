@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+		<meta name="viewport" content="width=deice-width, initial-scale=1.0">
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/bootstrap.css">
+		<link rel="stylesheet" href="css/photo.css">
+		<link rel="stylesheet" href="css/magnific-popup.css">
+
+	    <script src="js/jquery-2.1.4.min.js"></script>
+	    <script src="js/bootstrap.js"></script>
+	    <script src="js/photo.js"></script>	    
+		<script src="js/jquery.imagesloaded.js"></script>
+		<script src="js/jquery.wookmark.min.js"></script>
+		<script src="js/jquery.magnific-popup.min.js"></script>
+	</head>
+	<body>
+		<div id="containerBar" class="container-fluid">
+            <img id="music" src="image/music1.gif">
+        	<div id="rowBar" class="row">
+				<nav class="navbar navbar-default" role="navigation">
+				   <div class="navbar-header">
+				      <button type="button" class="navbar-toggle" data-toggle="collapse" 
+				         data-target="#example-navbar-collapse">
+				         <span class="sr-only">切换导航</span>
+				         <span class="icon-bar"></span>
+				         <span class="icon-bar"></span>
+				         <span class="icon-bar"></span>
+				      </button>
+				      <a class="navbar-brand" style="font-size: 27px; font-family: Microsoft Yahei"><strong>Say go Just go</strong></a>
+				   </div>
+				   <div class="collapse navbar-collapse" id="example-navbar-collapse">
+				      <ul class="nav navbar-nav">
+				         <li><a href="index.html"><strong>首页</strong></a></li>
+				         <li><a href="scenery.html"><strong>风景</strong></a></li>
+				         <li><a href="portrait.html"><strong>人像</strong></a></li>
+				         <li><a href="travel.html"><strong>游记</strong></a></li>
+<!-- 				         <li><a href="order.html"><strong>预约</strong></a></li> -->
+				         <li><a href="about.html"><strong>简介</strong></a></li>
+				      </ul>
+				      <ul id="ulHeadImaAndWord" class="nav navbar-nav pull-right">
+				     	<li>
+				     		<a href="about.html" style="display:inline; padding-right: 5px;"><img class="headImg" src="image/headImg.png"></a>
+				     		<span class="headImgWord"><strong>王 一 三</strong></span>
+				     	</li>
+				      </ul>
+				   </div>
+				</nav>
+			</div>
+		</div>
+		<div class="container-fluid">
+        	<div class="row">
+        		<div class="col-md-1"></div>
+        		<div class="col-md-10">     
+				<div class="main">
+					<div class="inwrap">
+						<div class="example">
+							<div id="main" role="main">
+								<ul id="tiles">
+									<!-- These is where we place content loaded from the Wookmark API -->
+								</ul>
+								<div id="loader">
+									<div id="loaderCircle">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				</div>
+				<div class="col-md-1"></div>
+			</div>
+		</div>
+		
+		<!-- 这部分脚本代码是用于向服务器请求数据，并动态插入元素 -->
+		<script>
+			(function ($) {
+				var $tiles = $('#tiles'),
+					$handler = $('li', $tiles),
+					page = 1,
+					isLoading = false,
+					apiURL = 'travel',
+					lastRequestTimestamp = 0,
+					fadeInDelay = 2000,
+					$window = $(window),
+					$document = $(document);
+				// Prepare layout options.
+				var options = {
+					autoResize: true, // This will auto-update the layout when the browser window is resized.
+					container: $('#tiles'), // Optional, used for some extra CSS styling
+					offset: 2, // Optional, the distance between grid items
+					itemWidth: 250 // Optional, the width of a grid item
+				};
+				/**
+   * When scrolled all the way to the bottom, add more tiles.
+   */
+				function onScroll(event){
+					// Only check when we're not still waiting for data.
+					if (!isLoading) {
+						// Check if we're within 100 pixels of the bottom edge of the broser window.
+						var closeToBottom = ($window.scrollTop() + $window.height() > $document.height() - 100);
+						if (closeToBottom) {
+							// Only allow requests every second
+							var currentTime = new Date().getTime();
+							if (lastRequestTimestamp < currentTime - 1000) {
+								lastRequestTimestamp = currentTime;
+								loadData();
+							}
+						}
+					}
+				};
+				/**
+   * Refreshes the layout.
+   */
+				function applyLayout($newImages){
+					options.container.imagesLoaded(function(){
+						// Destroy the old handler
+						if ($handler.wookmarkInstance) {
+							$handler.wookmarkInstance.clear();
+						}
+						// Create a new layout handler.
+						$tiles.append($newImages);
+						$handler = $('li', $tiles);
+						$handler.wookmark(options);
+						// Set opacity for each new image at a random time
+						$newImages.each(function(){
+							var $self = $(this);
+							window.setTimeout(function(){
+								$self.css('opacity', 1);
+							}
+											  , Math.random() * fadeInDelay);
+						}
+									   );
+					}
+												  );
+				};
+				/**
+   * Loads data from the API.
+   */
+				function loadData(){
+					isLoading = true;
+					$('#loaderCircle').show();
+					$.ajax({
+						url: apiURL,
+						dataType: 'json', // Set to jsonp if you use a server on a different domain and change it's setting accordingly
+						data: {
+							page: page}
+						, // Page parameter to make sure we load new data
+						success: onLoadData
+					}
+						  );
+				};
+				/**
+   * Receives data from the API, creates HTML for images and updates the layout
+   */
+				function onLoadData(response){
+					isLoading = false;
+					$('#loaderCircle').hide();
+					// Increment page index for future calls.
+					page++;
+					// Create HTML for the images.
+					var html = '',
+						data = response.data,
+						i = 0, length = data.length, image, opacity,
+						$newImages;
+					for (; i < length; i++) {
+						image = data[i];
+						html += '<li>';
+						html += '<a class="Original" href="'+image.image+'" title="'+image.title+'">';
+						// Image tag (preview in Wookmark are 200px wide, so we calculate the height based on that).
+						html += '<img src="'+image.preview+'" width="240" height="'+Math.round(image.height/image.width*240)+'">';
+						html += '</a>';
+						// Image title.
+						html += '<p><span class="glyphicon glyphicon-camera"></span> '+image.title+'<span class="glyphicon glyphicon-calendar"></span> '+image.time+'</p>';
+						//这里原先是<a>标签，但由于下面的灯窗插件脚本中使用a标签来进行处理，
+						//所以这里的a也会被加进去，相当于同一张图会被播放两次
+						//因些这里使用button控件来将a标签进行替换
+						html +=	'<button class="mark"></button>';
+						html += '</li>';
+					}
+					$newImages = $(html);
+					// Disable requests if we reached the end
+					if (response.message == 'No more pictures') {
+						$document.off('scroll', onScroll);
+					}
+					// Apply layout.
+					applyLayout($newImages);
+				};
+				// Capture scroll event.
+				$document.on('scroll', onScroll);
+				// Load first data from the API.
+				loadData();
+			}
+			)(jQuery);
+		</script>
+		
+		<!-- 这部分脚本代码是用于灯窗插件效果 -->
+ 		<script>
+			(function ($){
+			  // Prepare layout options.
+			  var options = {
+			    autoResize: true, // This will auto-update the layout when the browser window is resized.
+			    container: $('#main'), // Optional, used for some extra CSS styling
+			    offset: 2, // Optional, the distance between grid items
+			    itemWidth: 250 // Optional, the width of a grid item
+			  };
+			
+			  // Get a reference to your grid items.
+			  var handler = $('#tiles li');
+			
+			  // Init lightbox
+			  $('#tiles').magnificPopup({
+			    delegate: 'li:not(.inactive) a',
+			    type: 'image',
+			    gallery: {
+			      enabled: true
+			    }
+			  });
+			
+			  // Call the layout function after all images have loaded
+			  $('#tiles').imagesLoaded(function(){
+			    handler.wookmark(options);
+			  });
+			})(jQuery);
+		</script>
+		
+		<!-- music player -->
+		<audio></audio>
+	</body>
+</html>

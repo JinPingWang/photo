@@ -42,8 +42,26 @@ $(document).ready(function(){
         var Range = Max - Min;   
         var Rand = Math.random();   
         return(Min + Math.round(Rand * Range));   
-    }   	
+    }  
+    
+    /**
+     * 点击图片播放时，切换开关音乐
+     */
+    $("#music").click(function(){
+    	var src = $("#music").attr("src");
+    	var audio = $("audio").get(0);
+    	
+    	if(src == "image/music1.gif"){
+            audio.pause();
+            $("#music").attr("src", "image/music2.gif");
+    	}
+    	else{
+    		audio.play();
+            $("#music").attr("src", "image/music1.gif");
+    	}
+    })
 })
+
 
 /**
  * 如果是通过ajax动态加载的元素添加进行html中
