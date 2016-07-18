@@ -274,6 +274,7 @@ body {
 	height: 95%;
 	display: inline; 
 	float: left; 
+	cursor: pointer;
 } 
  
 @media screen and (max-width: 980px){
