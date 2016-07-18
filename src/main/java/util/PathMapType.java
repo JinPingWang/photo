@@ -36,6 +36,13 @@ public class PathMapType {
 	
 	
 	public int getType(String path){
-		return map.get(path);
+		//判断是否有人利用ajax进行非法请求，对于非法请求都将返回值设置为1
+		Integer result = map.get(path);
+		if(result == null){
+			return 1;
+		}
+		else{
+			return result;
+		}
 	}
 }
