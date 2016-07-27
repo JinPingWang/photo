@@ -42,12 +42,12 @@ public class Photo {
 			
 			//如果type=1，则选择所有类型照片进行展现；否则选择特定类型照片进行展现
 			if(type == 1){
-				sql = "select * from (select * from photo limit "+number+" )as t1 where id not in "
-					+ "(select id from (select id from photo limit "+numberBefore+")as t2) order by time desc";
+				sql = "select * from (select * from photo  order by time desc limit "+number+" )as t1 where id not in "
+					+ "(select id from (select id from photo  order by time desc limit "+numberBefore+")as t2) order by time desc";
 			}
 			else{
-				sql = "select * from (select * from photo where type="+type+" limit "+number+" )as t1 where id not in "
-						+ "(select id from (select id from photo where type="+type+" limit "+numberBefore+")as t2) order by time desc";
+				sql = "select * from (select * from photo where type="+type+" order by time desc limit "+number+" )as t1 where id not in "
+						+ "(select id from (select id from photo where type="+type+" order by time desc limit "+numberBefore+")as t2)";
 			}
 			
 			ResultSet rs = stat.executeQuery(sql);
