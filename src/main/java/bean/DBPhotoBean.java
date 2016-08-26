@@ -42,6 +42,7 @@ public class DBPhotoBean {
 	public void setWidth(String width) {
 		this.width = width;
 	}
+	
 	public String getHeight() {
 		return height;
 	}
