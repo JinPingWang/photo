@@ -14,7 +14,6 @@ public class Json {
 	public String getJson(Object object) throws IOException{
 		
 		String jsonString = null;
-
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.setVisibility(JsonMethod.FIELD, Visibility.ANY);
 		StringWriter sw = new StringWriter();
