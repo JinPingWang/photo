@@ -41,6 +41,7 @@ public class CompressionResponseWrapper extends HttpServletResponseWrapper{
 		if((streamUsed != null) && (streamUsed != servletGzipOS)){
 			throw new IllegalStateException();
 		}
+		
 		if(pw == null){
 			servletGzipOS = new GZIPServletOutputStream(getResponse().getOutputStream());
 			OutputStreamWriter osw = new OutputStreamWriter(servletGzipOS, getResponse().getCharacterEncoding());
