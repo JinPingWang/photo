@@ -11,7 +11,7 @@ public class InsertPhoto {
 	public static void main(String[] args) throws SQLException, Exception {
 		// TODO Auto-generated method stub
 		Photo photo = new Photo();
-		photo.addPhoto("马拉松", "", "2016-03-30", "4", "/photo/image/2016/马拉松/", Paths.get("D:\\相片\\马拉松"));
+		photo.addPhoto("黄银杏", "", "2016-11-25", "2", "/photo/image/2016/黄银杏/", Paths.get("D:\\Documents\\Downloads\\银杏\\白天已完成"));
 		PhotosBean photosBean = photo.getPhoto(1, 1);
 		System.out.println(photosBean.getData().size());
 	}
